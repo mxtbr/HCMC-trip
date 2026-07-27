@@ -136,14 +136,15 @@
   }
   .stop-card img{ width:64px; height:64px; border-radius:8px; object-fit:cover; flex:0 0 auto; }
   .stop-main{ flex:1; min-width:0; }
-  .stop-time-row{ display:flex; align-items:center; gap:8px; margin-bottom:3px; }
+  .stop-time-row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:3px; }
+  .stop-time-left{ display:flex; align-items:center; gap:8px; }
   .stop-time{ font-size:0.72rem; color:var(--text2); font-weight:500; }
   .stop-name{ font-size:0.98rem; font-weight:700; margin:1px 0 4px; display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
   .stop-note{ font-size:0.83rem; color:var(--text2); margin:0 0 6px; }
   .stop-foot{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .rating{ font-size:0.76rem; color:var(--text2); }
   .rating b{ color:var(--text); }
-  .stop-link{ font-size:0.78rem; font-weight:600; color:var(--blue); text-decoration:none; margin-left:auto; }
+  .stop-link{ font-size:0.78rem; font-weight:600; color:var(--blue); text-decoration:none; flex:0 0 auto; }
   .tag-book{
     font-size:0.62rem; font-weight:700; color:#fff; background:#D93025;
     padding:2px 7px; border-radius:4px; letter-spacing:0.02em;
@@ -431,6 +432,7 @@ function collapseMap(){
   document.body.style.overflow = '';
   google.maps.event.trigger(map, 'resize');
   if(lastBounds) map.fitBounds(lastBounds, 90);
+  window.scrollTo({ top:0, behavior:'instant' });
 }
 fabEl.addEventListener('click', expandMap);
 closeBtnEl.addEventListener('click', collapseMap);
