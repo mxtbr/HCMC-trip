@@ -40,16 +40,16 @@
     border-radius:100px; white-space:nowrap;
   }
   .fab-map{
-    display:none; align-items:center; gap:6px;
+    display:flex; align-items:center; gap:6px;
     position:fixed; right:16px; bottom:20px; z-index:900;
     background:var(--text); color:#fff; border:none; border-radius:100px;
     padding:12px 18px; font-family:'Google Sans',sans-serif; font-size:0.85rem; font-weight:600;
     box-shadow:0 4px 14px rgba(0,0,0,0.35); cursor:pointer;
   }
-  .fab-map.show{ display:flex; }
+  .fab-map.hide{ display:none; }
 
   #mapCloseBtn{
-    display:none; position:absolute; top:10px; right:12px; z-index:600;
+    display:none; position:absolute; top:56px; right:12px; z-index:600;
     width:36px; height:36px; border-radius:50%; background:#fff; border:none;
     align-items:center; justify-content:center; box-shadow:0 1px 5px rgba(0,0,0,0.3);
     font-size:1rem; cursor:pointer; color:var(--text);
@@ -411,30 +411,20 @@ const closeBtnEl = document.getElementById('mapCloseBtn');
 
 function expandMap(){
   mapModuleEl.classList.add('expanded');
-  fabEl.classList.remove('show');
+  fabEl.classList.add('hide');
   document.body.style.overflow = 'hidden';
   google.maps.event.trigger(map, 'resize');
   if(lastBounds) map.fitBounds(lastBounds, 90);
 }
 function collapseMap(){
   mapModuleEl.classList.remove('expanded');
+  fabEl.classList.remove('hide');
   document.body.style.overflow = '';
   google.maps.event.trigger(map, 'resize');
   if(lastBounds) map.fitBounds(lastBounds, 90);
 }
 fabEl.addEventListener('click', expandMap);
 closeBtnEl.addEventListener('click', collapseMap);
-
-if('IntersectionObserver' in window){
-  const mapVisibilityObs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(!mapModuleEl.classList.contains('expanded')){
-        fabEl.classList.toggle('show', !e.isIntersecting);
-      }
-    });
-  }, { threshold:0 });
-  mapVisibilityObs.observe(mapModuleEl);
-}
 
 /* ================= INIT ================= */
 function initMap(){
