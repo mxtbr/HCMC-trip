@@ -184,7 +184,7 @@
   <section class="practical">
     <h2>ก่อนไป — เช็คลิสต์</h2>
     <ul>
-      <li><b>ต้องจองล่วงหน้า:</b> Pizza 4P's (pizza4ps.com), Bếp Mẹ Ìn, Cloud Nine — คนแน่นทุกวัน</li>
+      <li><b>ต้องจองล่วงหน้า:</b> Pizza 4P's (pizza4ps.com), Bếp Mẹ Ìn — คนแน่นทุกวัน</li>
       <li><b>หน้าฝน:</b> ปลาย ก.ค.–ต้น ส.ค. ฝนตกบ่าย/เย็นเกือบทุกวัน พกร่ม เผื่อ buffer 30 นาที</li>
       <li><b>เงินสด:</b> ร้าน vintage/local หลายเจ้า (Xéo Xọ, Đầu Hàng) รับเงินสดเท่านั้น</li>
       <li><b>เดินทาง:</b> ใช้ Grab เป็นหลัก — bike เร็วกว่ารถช่วง rush hour</li>
@@ -212,7 +212,7 @@ const DAYS = [
   { id:1, label:'Day 1 · 28 ก.ค.', title:'ถึงบ่าย → D1 core', narr:'ถึง 15:00 เช็คอินก่อน จากนั้นเดินสำรวจใจกลาง District 1 แบบไม่เร่ง' },
   { id:2, label:'Day 2 · 29 ก.ค.', title:'Coffee crawl + Phú Nhuận shopping', narr:'บ่ายเป็นคลัสเตอร์ช้อปปิ้งใหญ่ 4 ร้านอยู่หัวมุมเดียวกัน ไม่ต้องรีบ' },
   { id:3, label:'Day 3 · 30 ก.ค.', title:'Thảo Điền + local seafood + rooftop', narr:'เช้า-บ่ายอยู่ Thảo Điền เย็นกลับ D1 กินหอยก่อนขึ้นรูฟท็อป' },
-  { id:4, label:'Day 4 · 31 ก.ค.', title:'Designer + local + fine dining', narr:'วันแน่นสุด — แฟชั่นเช้า ของหวานบ่าย fine dining + คราฟต์เบียร์ + มื้อดึก' },
+  { id:4, label:'Day 4 · 31 ก.ค.', title:'Designer + local + craft beer', narr:'วันแน่นสุด — แฟชั่นเช้า ของหวานบ่าย ก๋วยเตี๋ยวปูมื้อเย็น + คราฟต์เบียร์ปิดท้าย' },
   { id:5, label:'Day 5 · 1 ส.ค.', title:'เช้าสั้นๆ ก่อนบิน', narr:'บิน 17:00 — ออกจาก D1 ไม่เกิน 13:15 เที่ยวเบาๆ ตอนเช้าเท่านั้น' }
 ];
 
@@ -254,9 +254,8 @@ const stops = [
   { day:4, time:'12:15', name:'Étsé Project + New Playground', cat:'shop', note:'เดรส/ผ้าไหม + มอลล์ streetwear ใต้ดิน ตึกเดียวกัน', lat:10.7782314, lng:106.7010998, url:'https://maps.google.com/?cid=12409015481804247322', photo:'https://lh3.googleusercontent.com/place-photos/AG9NLjDIBjKrWMBRGaf9qUjKo8VysixY_yMkodMwl5qL7xsXS-jUM0t9lUPSIU_Qj0laf0AiSB177fy2KZ1VX84p82LgT8nABQqEoTaxzZooJCFBFYpEPcW3jWgx6EQfa6qhLClka_gwLdyCdQG_0Nc=s800', rating:5.0, count:'327' },
   { day:4, time:'13:30', name:'Bếp Mẹ Ìn', cat:'food', note:'ร้านเวียดนาม Michelin Guide — Bánh Xèo + Cơm Tấm', lat:10.7738567, lng:106.6980798, url:'https://maps.google.com/?cid=4999984471408903447', photo:'https://lh3.googleusercontent.com/place-photos/AG9NLjDaE5VBNwzC-jFLgPy_3rU81HfAWQqtZlt84uuw6XOMe4hhY4eKji9yu2dG7luKaEuhI2_QCujJkL5r9F1SpZc2X80QciMgy0Sg9VtTaAO5jTYfJDh6DeBO1ZeOI6yp6_Gc-5mdPV5-NGZL5aHm69xC-w=s800', rating:4.6, count:'12.4k', book:true },
   { day:4, time:'16:00', name:'Chè mè đen', cat:'dessert', note:'ของหวานงาดำ ร้านเล็กเจ้าของตา-ยาย', lat:10.7681773, lng:106.6986895, url:'https://maps.google.com/?cid=10653390268181147858', photo:'https://lh3.googleusercontent.com/place-photos/AG9NLjC4voZGFbpK5vw5gPeU3CfyIYq-82gdoQ6ornXnMug-wjHVQHZXZLraLBqHipjefN9pzTyZFkU9VPIRnhvsNP6_W2JVMH9vPgf4yTHdxCdHqde8ZZSq8AVm6Gf4WNQiWfGAcIeHKOZM7e7A=s800', rating:4.6, count:'454' },
-  { day:4, time:'19:00', name:'Cloud Nine Restaurant', cat:'food', note:'fine dining ชั้น 11 โรงแรม La Siesta', lat:10.7731993, lng:106.6956783, url:'https://maps.google.com/?cid=12148414139870272817', photo:'https://lh3.googleusercontent.com/place-photos/AG9NLjCkulAs3Q8BmP4Rx10tHzz89oeJWsruSjXOJ2sUcxFM5_Qso66ckTHejU9NUmtfT_Idxpipf_aTRccPTaUlWGZMEqrxWHfAQWwEK-t6P_Yb1A3GVvysymRi_UU6cg2MjJ41xywNqMgMMT3H=s800', rating:4.8, count:'554', book:true },
+  { day:4, time:'19:00', name:'Bánh Canh Cua 14', cat:'food', note:'ก๋วยเตี๋ยวปูสไตล์คนไซง่อนจริงๆ', lat:10.759495, lng:106.6801699, url:'https://maps.google.com/?cid=1943380873087960012', photo:'https://lh3.googleusercontent.com/place-photos/AG9NLjCVN12kXnTj2vEkTzA8XXwuxjWCVSbANkOPBF-WAm6DnOo2e2NMl6KDceeHgbUrmsFCAI068yRoWZMs9hZZd5JUS0ntJLUd-LmeLWtjt7cQxpbwNdbkhPnT4MevXx7mKlgtJK4FpyLpTK0rHA=s800', rating:4.6, count:'3.9k' },
   { day:4, time:'21:00', name:'Pasteur Street Brewing Co.', cat:'bar', note:'คราฟต์เบียร์ตำนานของไซง่อน มี rooftop', lat:10.7751756, lng:106.7010337, url:'https://maps.google.com/?cid=6487031096206039281', photo:'https://lh3.googleusercontent.com/place-photos/AG9NLjALGGso2EIPuxFUbmh6WEN27EGI1s1_nz7z817B5qqy2b4nuKWbtG3MvKeTuIxrCtlL0XHvy4p-EvcgEOnWw5S14XzzADXc0eb6C8Wl6ejVWBT6WLr_AS3cggaLN5zdn3sht_pHMMiAvsCeMr_8_RAA=s800', rating:4.8, count:'4.8k' },
-  { day:4, time:'22:30', name:'Bánh Canh Cua 14', cat:'food', note:'ก๋วยเตี๋ยวปูมื้อดึกหลังเบียร์', lat:10.759495, lng:106.6801699, url:'https://maps.google.com/?cid=1943380873087960012', photo:'https://lh3.googleusercontent.com/place-photos/AG9NLjCVN12kXnTj2vEkTzA8XXwuxjWCVSbANkOPBF-WAm6DnOo2e2NMl6KDceeHgbUrmsFCAI068yRoWZMs9hZZd5JUS0ntJLUd-LmeLWtjt7cQxpbwNdbkhPnT4MevXx7mKlgtJK4FpyLpTK0rHA=s800', rating:4.6, count:'3.9k' },
 
   // DAY 5
   { day:5, time:'08:30', name:'Naii Specialty Coffee', cat:'coffee', note:'egg coffee แก้วสุดท้าย — ปิด 5 โมงเย็น', lat:10.7745639, lng:106.7002024, url:'https://maps.google.com/?cid=12265647650647125394', photo:'https://lh3.googleusercontent.com/place-photos/AG9NLjAEWbTkxntdAc82Ps60Zd4ZxOqmAZafvSUGaTx691mL1imborNd-ucR0s-OMqGfbNVIwmiAD31RL495usZsweE710Ghw65rtbxu6ffcBjs1TywxoR0FrPH5R4KlhkcH4jvcxdKhYt-e2_rBhwDqN7LZIg=s800', rating:5.0, count:'525' },
@@ -388,9 +387,11 @@ DAYS.forEach(d=>{
     card.innerHTML = `
       <img src="${s.photo}" onerror="this.style.display='none'">
       <div class="stop-main">
-        <div class="stop-time">${s.time}</div>
-        <div class="stop-name">${s.name}
+        <div class="stop-time-row">
+          <span class="stop-time">${s.time}</span>
           <span class="chip" style="background:${c.bg};color:${c.text}">${c.emoji} ${c.label}</span>
+        </div>
+        <div class="stop-name">${s.name}
           ${s.book ? '<span class="tag-book">BOOK AHEAD</span>' : ''}
         </div>
         <p class="stop-note">${s.note}</p>
