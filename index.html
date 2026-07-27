@@ -121,7 +121,8 @@
   .ccard .cmeta b{ color:var(--text); }
 
   /* ---------- DETAIL LIST ---------- */
-  .day-section{ padding-top:34px; scroll-margin-top:16px; }
+  .day-section{ display:none; padding-top:24px; scroll-margin-top:16px; }
+  .day-section.active{ display:block; }
   .day-head{ padding:0 16px; margin-bottom:4px; }
   .day-eyebrow{ font-size:0.72rem; font-weight:700; color:var(--blue); letter-spacing:0.03em; text-transform:uppercase; }
   .day-title{ font-size:1.15rem; font-weight:700; margin:2px 0 4px; }
@@ -307,8 +308,7 @@ function cardHTML(s, idx){
 }
 
 /* ================= DAY SWITCH ================= */
-function showDay(dayId, opts){
-  opts = opts || {};
+function showDay(dayId){
   document.querySelectorAll('.day-pill').forEach(p=>p.classList.toggle('active', +p.dataset.day===dayId));
 
   currentMarkers.forEach(m=>m.setMap(null));
@@ -346,10 +346,9 @@ function showDay(dayId, opts){
   });
   carouselEl.scrollTo({ left:0, behavior:'auto' });
 
-  if(opts.scroll){
-    const section = document.getElementById('day'+dayId);
-    if(section) section.scrollIntoView({ behavior:'smooth', block:'start' });
-  }
+  document.querySelectorAll('.day-section').forEach(sec=>{
+    sec.classList.toggle('active', sec.id === 'day'+dayId);
+  });
 }
 
 function focusCard(i){
@@ -363,7 +362,7 @@ const pillsEl = document.getElementById('dayPills');
 DAYS.forEach(d=>{
   const b=document.createElement('button');
   b.className='day-pill'; b.dataset.day=d.id; b.textContent=d.label;
-  b.addEventListener('click', ()=>showDay(d.id, { scroll:true }));
+  b.addEventListener('click', ()=>showDay(d.id));
   pillsEl.appendChild(b);
 });
 
@@ -372,6 +371,7 @@ const listEl = document.getElementById('detailList');
 DAYS.forEach(d=>{
   const section = document.createElement('section');
   section.className='day-section'; section.id='day'+d.id;
+  if(d.id===1) section.classList.add('active');
 
   const head = document.createElement('div');
   head.className='day-head';
