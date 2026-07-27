@@ -34,20 +34,34 @@
   header.top h1{ margin:0; font-size:1.2rem; font-weight:700; }
   header.top .sub{ margin-top:2px; font-size:0.85rem; color:var(--text2); }
 
-  .legend{
-    display:flex; flex-wrap:wrap; gap:6px; padding:12px 16px 4px;
-  }
   .chip{
     display:inline-flex; align-items:center; gap:4px;
     font-size:0.72rem; font-weight:500; padding:4px 10px;
     border-radius:100px; white-space:nowrap;
   }
+  .fab-map{
+    display:none; align-items:center; gap:6px;
+    position:fixed; right:16px; bottom:20px; z-index:900;
+    background:var(--text); color:#fff; border:none; border-radius:100px;
+    padding:12px 18px; font-family:'Roboto',sans-serif; font-size:0.85rem; font-weight:600;
+    box-shadow:0 4px 14px rgba(0,0,0,0.35); cursor:pointer;
+  }
+  .fab-map.show{ display:flex; }
+
+  #mapCloseBtn{
+    display:none; position:absolute; top:10px; right:12px; z-index:600;
+    width:36px; height:36px; border-radius:50%; background:#fff; border:none;
+    align-items:center; justify-content:center; box-shadow:0 1px 5px rgba(0,0,0,0.3);
+    font-size:1rem; cursor:pointer; color:var(--text);
+  }
+  .map-module.expanded #mapCloseBtn{ display:flex; }
 
   /* ---------- MAP MODULE ---------- */
-  .map-module{
-    position:sticky; top:0; z-index:20; margin:8px 0 0;
-    background:var(--bg); border-bottom:1px solid var(--border);
+  .map-module{ position:relative; margin:8px 0 0; }
+  .map-module.expanded{
+    position:fixed; inset:0; z-index:1000; height:100vh; margin:0; background:#fff;
   }
+  .map-module.expanded #map{ height:100%; }
   #map{
     height:min(52vh, 440px); width:100%;
     background:var(--surface);
@@ -154,13 +168,14 @@
     <div class="sub">28 Jul – 1 Aug · Food · Coffee · Cocktails · Shopping</div>
   </header>
 
-  <div class="legend" id="legend"></div>
-
   <div class="map-module">
     <div id="map"></div>
+    <button id="mapCloseBtn" aria-label="ปิดแผนที่">✕</button>
     <div class="day-pills" id="dayPills"></div>
     <div class="carousel" id="carousel"></div>
   </div>
+
+  <button class="fab-map" id="fabMap">🗺️ แผนที่</button>
 
   <div id="detailList"></div>
 
@@ -248,20 +263,11 @@ const stops = [
   { day:5, time:'12:00', name:'Delicious street food (Đề Thám)', cat:'food', note:'มื้อเที่ยงเร็วก่อนไปสนามบิน ร้านครอบครัว', lat:10.76845, lng:106.6933024, url:'https://maps.google.com/?cid=13933227824116896354', photo:'https://lh3.googleusercontent.com/place-photos/AG9NLjDrFm18s8KRA2flbGT3G24K61CRB4eG3tKU5iqbTH2GAWpacDhoSgxpEAAUTQJ4CB72gQbnq1dk0qa2HiF7hTu36M16-JUTJqXDu6bEzygtZWVHKNejIRHXjvpxAb2giIDWVkQe8Hu3OIuRkuEiLxbIRg=s800', rating:5.0, count:'10' }
 ];
 
-/* ================= LEGEND ================= */
-const legendEl = document.getElementById('legend');
-Object.values(CATS).forEach(c=>{
-  const s=document.createElement('span');
-  s.className='chip';
-  s.style.background=c.bg; s.style.color=c.text;
-  s.textContent=`${c.emoji} ${c.label}`;
-  legendEl.appendChild(s);
-});
-
 /* ================= MAP ================= */
 let map;
 let infowindow;
 let currentMarkers = [];
+let lastBounds = null;
 
 function markerIcon(color){
   return {
@@ -326,7 +332,7 @@ function showDay(dayId, opts){
     currentMarkers.push(marker);
     bounds.extend(marker.getPosition());
   });
-  if(dayStops.length){ map.fitBounds(bounds, 90); }
+  if(dayStops.length){ map.fitBounds(bounds, 90); lastBounds = bounds; }
 
   carouselEl.innerHTML = dayStops.map((s,i)=>cardHTML(s,i)).join('');
   carouselEl.querySelectorAll('.ccard').forEach(card=>{
@@ -397,6 +403,38 @@ DAYS.forEach(d=>{
   section.appendChild(list);
   listEl.appendChild(section);
 });
+
+/* ================= EXPAND / COLLAPSE MAP ================= */
+const mapModuleEl = document.querySelector('.map-module');
+const fabEl = document.getElementById('fabMap');
+const closeBtnEl = document.getElementById('mapCloseBtn');
+
+function expandMap(){
+  mapModuleEl.classList.add('expanded');
+  fabEl.classList.remove('show');
+  document.body.style.overflow = 'hidden';
+  google.maps.event.trigger(map, 'resize');
+  if(lastBounds) map.fitBounds(lastBounds, 90);
+}
+function collapseMap(){
+  mapModuleEl.classList.remove('expanded');
+  document.body.style.overflow = '';
+  google.maps.event.trigger(map, 'resize');
+  if(lastBounds) map.fitBounds(lastBounds, 90);
+}
+fabEl.addEventListener('click', expandMap);
+closeBtnEl.addEventListener('click', collapseMap);
+
+if('IntersectionObserver' in window){
+  const mapVisibilityObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!mapModuleEl.classList.contains('expanded')){
+        fabEl.classList.toggle('show', !e.isIntersecting);
+      }
+    });
+  }, { threshold:0 });
+  mapVisibilityObs.observe(mapModuleEl);
+}
 
 /* ================= INIT ================= */
 function initMap(){
