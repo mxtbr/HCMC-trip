@@ -6,7 +6,7 @@
 <title>Ho Chi Minh City · Trip Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#FFFFFF;
@@ -23,14 +23,14 @@
   @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
   body{
     margin:0; background:var(--bg); color:var(--text);
-    font-family:'Roboto', Arial, sans-serif; line-height:1.5;
+    font-family:'Google Sans Flex', Arial, sans-serif; line-height:1.5;
     -webkit-font-smoothing:antialiased;
   }
   .wrap{ max-width:720px; margin:0 auto; }
   .pad{ padding:0 16px; }
 
   /* ---------- HEADER ---------- */
-  header.top{ padding:18px 16px 12px; border-bottom:1px solid var(--border); }
+  header.top{ padding:18px 16px 12px; }
   header.top h1{ margin:0; font-size:1.2rem; font-weight:700; }
   header.top .sub{ margin-top:2px; font-size:0.85rem; color:var(--text2); }
 
@@ -43,7 +43,7 @@
     display:none; align-items:center; gap:6px;
     position:fixed; right:16px; bottom:20px; z-index:900;
     background:var(--text); color:#fff; border:none; border-radius:100px;
-    padding:12px 18px; font-family:'Roboto',sans-serif; font-size:0.85rem; font-weight:600;
+    padding:12px 18px; font-family:'Google Sans Flex',sans-serif; font-size:0.85rem; font-weight:600;
     box-shadow:0 4px 14px rgba(0,0,0,0.35); cursor:pointer;
   }
   .fab-map.show{ display:flex; }
@@ -72,7 +72,7 @@
   }
   .day-pills::-webkit-scrollbar{ display:none; }
   .day-pill{
-    flex:0 0 auto; font-family:'Roboto', sans-serif; font-size:0.8rem; font-weight:500;
+    flex:0 0 auto; font-family:'Google Sans Flex', sans-serif; font-size:0.8rem; font-weight:500;
     padding:8px 14px; border-radius:100px; border:none; cursor:pointer;
     background:#fff; color:var(--text);
     box-shadow:0 1px 3px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.15);
@@ -454,7 +454,7 @@ function initMap(){
   setTimeout(function(){
     if(!window.__gmapsLoaded){
       var m = document.getElementById('map');
-      if(m){ m.innerHTML = '<div style="padding:24px;text-align:center;color:#5F6368;font-size:0.82rem;font-family:Roboto,sans-serif">แผนที่โหลดไม่ได้ในตัวอย่างนี้ — ลองเปิดไฟล์นี้ในเบราว์เซอร์โดยตรง หรือหลัง Publish จะใช้งานได้ปกติ</div>'; }
+      if(m){ m.innerHTML = '<div style="padding:24px;text-align:center;color:#5F6368;font-size:0.82rem;font-family:Google Sans Flex,sans-serif">แผนที่โหลดไม่ได้ในตัวอย่างนี้ — ลองเปิดไฟล์นี้ในเบราว์เซอร์โดยตรง หรือหลัง Publish จะใช้งานได้ปกติ</div>'; }
     }
   }, 6000);
 </script>
